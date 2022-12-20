@@ -7,12 +7,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.entity.mime.Header;
 import edu.upi.cs.yudiwbs.uas_template.databinding.FragmentDuaBinding;
 import edu.upi.cs.yudiwbs.uas_template.databinding.FragmentSatuBinding;
 
@@ -59,8 +67,25 @@ public class FragmentDua extends Fragment {
         binding.buttonFrag2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alHasil.add(new Hasil("satu..."));
-                adapter.notifyDataSetChanged();
+                ApiAdvice.get("advice", null, new JsonHttpResponseHandler() {
+
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                        String fakta = null;
+                        int pjg = 0;
+                        try {
+                            fakta = (String) response.get("advice");
+                            pjg = (int) response.get("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d("debugyudi", fakta +";" +String.valueOf(pjg)); //hasil
+                    }
+
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray jArr) {
+//tidak digunakan karena returnya berbentuk objek { } bukan array [ ]
+                    }
+                });
             }
         });
         return view;
