@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -55,7 +56,7 @@ public class FragmentSatu extends Fragment {
                 //https://api.coindesk.com/v1/bpi/currentprice.json
                 Log.d("debugyudi","onclick");
                 ApiAdvice.get("advice", null, new JsonHttpResponseHandler() {
-                    @Override
+
                     //hati2 success jsonobjek atau jsonarray
                     public void onSuccess(int statusCode,
                                           cz.msebera.android.httpclient.Header[] headers,
@@ -65,9 +66,8 @@ public class FragmentSatu extends Fragment {
 
                         String rate="";
                         try {
-                            JSONObject slip = response.getJSONObject("slip");
-                            JSONObject id = slip.getJSONObject("id");
-                            rate = (String) id.get("advice");
+
+                            rate = (String) response.get("advice");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("debugyudi", "msg error" +":" +e.getMessage());
@@ -84,7 +84,7 @@ public class FragmentSatu extends Fragment {
 
                     }
 
-                    @Override
+
                     public  void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String err, Throwable throwable)  {
                         Log.e("debugyudi", "error " + ":" + statusCode +":"+ err);
                     }
