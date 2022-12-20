@@ -58,15 +58,26 @@ public class FragmentSatu extends Fragment {
                 ApiAdvice.get("advice", null, new JsonHttpResponseHandler() {
 
                     //hati2 success jsonobjek atau jsonarray
+                    @Override
                     public void onSuccess(int statusCode,
                                           cz.msebera.android.httpclient.Header[] headers,
                                           org.json.JSONObject response) {
                         Log.d("debugyudi","onSuccess jsonobjek");
 
-
-                        String rate= null;
+                        /*
+                        Hasil JSON
+                        {
+                        "slip":
+                            {
+                                "id": 177,
+                                "advice": "Everyone has their down days. Don't take it out on innocent bystanders."
+                            }
+                        } 
+                        */
+                        String rate= "";
                         try {
-                            rate = (String) response.get("advice");
+                            JSONObject slip = response.getJSONObject("slip");
+                            rate = (String) slip.get("advice");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("debugyudi", "msg error" +":" +e.getMessage());
@@ -76,7 +87,7 @@ public class FragmentSatu extends Fragment {
                     }
 
 
-
+                    @Override
                     public  void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String err, Throwable throwable)  {
                         Log.e("debugyudi", "error " + ":" + statusCode +":"+ err);
                     }
