@@ -64,25 +64,17 @@ public class FragmentSatu extends Fragment {
                         Log.d("debugyudi","onSuccess jsonobjek");
 
 
-                        String rate="";
+                        String rate= null;
                         try {
-
                             rate = (String) response.get("advice");
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e("debugyudi", "msg error" +":" +e.getMessage());
                         }
-                        Log.d("debugyudi", "rate" +":" +rate);
+                        Log.d("debugyudi", rate +":");
                         binding.tvKeterangan.setText(rate);
                     }
 
-                    public void onSuccess(int statusCode,
-                                          cz.msebera.android.httpclient.Header[] headers,
-                                          org.json.JSONArray response) {
-
-                        Log.d("debugyudi","onSuccess jsonarray");
-
-                    }
 
 
                     public  void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String err, Throwable throwable)  {

@@ -8,7 +8,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class ApiAdvice {
-    private static final String BASE_URL = "https://api.adviceslip.com/advice";
+    private static final String BASE_URL = "https://api.adviceslip.com";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
