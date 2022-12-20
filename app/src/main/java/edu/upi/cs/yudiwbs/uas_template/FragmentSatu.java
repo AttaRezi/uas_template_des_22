@@ -53,7 +53,7 @@ public class FragmentSatu extends Fragment {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {binding.tvKeterangan.setText("Tunggu sebentar");
-                //https://api.coindesk.com/v1/bpi/currentprice.json
+
                 Log.d("debugyudi","onclick");
                 ApiAdvice.get("/advice", null, new JsonHttpResponseHandler() {
 
