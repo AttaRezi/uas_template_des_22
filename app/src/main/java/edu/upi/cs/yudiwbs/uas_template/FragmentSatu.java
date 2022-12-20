@@ -55,7 +55,7 @@ public class FragmentSatu extends Fragment {
             public void onClick(View view) {binding.tvKeterangan.setText("Tunggu sebentar");
                 //https://api.coindesk.com/v1/bpi/currentprice.json
                 Log.d("debugyudi","onclick");
-                ApiAdvice.get("advice", null, new JsonHttpResponseHandler() {
+                ApiAdvice.get("/advice", null, new JsonHttpResponseHandler() {
 
                     //hati2 success jsonobjek atau jsonarray
                     @Override
@@ -72,7 +72,7 @@ public class FragmentSatu extends Fragment {
                                 "id": 177,
                                 "advice": "Everyone has their down days. Don't take it out on innocent bystanders."
                             }
-                        } 
+                        }
                         */
                         String rate= "";
                         try {
@@ -82,7 +82,7 @@ public class FragmentSatu extends Fragment {
                             e.printStackTrace();
                             Log.e("debugyudi", "msg error" +":" +e.getMessage());
                         }
-                        Log.d("debugyudi", rate +":");
+                        Log.d("debugyudi", "rate" +":" +rate);
                         binding.tvKeterangan.setText(rate);
                     }
 
